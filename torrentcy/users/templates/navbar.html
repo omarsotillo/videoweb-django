@@ -1,0 +1,62 @@
+<nav class="navbar navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/" style="text-decoration:none;">
+        <i class="fa fa-camera-retro"></i> EnjoyPlanet
+      </a>
+    </div>
+    <!--  SI ESTA DENTRO-->
+    {% if not request.user.is_authenticated %}
+    <ul class="nav navbar-nav navbar-right">
+      <a href="/login">
+        <button type="button"  class="btn navbar-btn btn-navy">Login</button>
+      </a>
+      <button type="button " class="btn navbar-btn btn-navy" data-toggle="modal" data-target="#myModal">Sign in</button>
+    </ul>
+    {% else %}
+    <!-- SINO ESTA DENTRO -->
+    <ul class="nav navbar-nav navbar-right">
+    <p class="navbar-text">Signed in as {{request.user.username}}</p>
+    <a href="/logout">
+      <button type="button" class="btn navbar-btn btn-navy">Logout</button>
+    </a>
+    <a class="btn navbar-btn btn-navy" href="/modify"><i class="fa fa-cog"></i> Modify Profile<a>
+    </ul>
+    {% endif %}
+  </div>
+</nav>
+<!-- POPUP -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Register</h4>
+      </div>
+      <div class="modal-body">
+        <!-- FORM CLASS DE REGISTER -->
+        <form class="form-signin" action="/" method="post">
+          {% csrf_token %}
+          <label for="inputemail">Email</label>
+          <input type="email" id="inputemail" class="form-control" placeholder="example@gmail.com" name="email" value="{{email}}" required>
+          <label for="inputUsername">Username</label>
+          <input type="text" id="inputText" class="form-control" placeholder="Username" name="username" value="{{ username}}" required autofocus>
+          <label for="inputPassword">Password</label>
+          <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" value="" required>
+          <label for="inputfirst_name">First Name</label>
+          <input type="text" id="inputfirst_name" class="form-control" placeholder="First Name" name="first_name" value="{{first_name}}" required>
+          <label for="inputlast_name">Last Name</label>
+          <input type="text" id="inputlast_name" class="form-control" placeholder="Last Name" name="last_name" value="{{last_name}}" required>
+          <button class="btn btn-lg btn-block btn-navy" value="Register" type="submit">Sign in</button>
+        </form>
+      </div>
+      <!--  -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-navy" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>

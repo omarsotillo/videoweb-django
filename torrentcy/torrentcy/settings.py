@@ -57,7 +57,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-        '/home/omar/Repositorios/VideoWeb/torrentcy/templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

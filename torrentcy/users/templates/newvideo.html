@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+<!-- HEAD -->
+{% block head %}
+<link rel="stylesheet" href="../static/login.css" /> {% endblock %}
+<!-- BODY -->
+{% block content %}
+
+<div class="container container-margin">
+  {% if request.user.is_authenticated%}
+
+  <form class="form-signin" action="/newvideo/" method="post">
+    {% csrf_token %}
+    <label for="inputname">Name of the video</label>
+    <input type="text" id="inputname" class="form-control" placeholder="Name of the video" name="name" value="{{name}}" required autofocus>
+    <label for="inputDescription">Description</label>
+    <input type="text" id="inputText" class="form-control" placeholder="Description" name="description" value="" required>
+    <label for="inputTags">Tags</label>
+    <input type="text" id="inputTags" class="form-control" placeholder="Tags" name="tags" value="" required>
+    <label for="inputPrivate">Private</label>
+    <input type="checkbox" id="inputPrivate" class="form-control" placeholder="Private" name="private" checked="private">
+    <label for="inputfile">File</label>
+    <input type="file" id="inputfile" class="form-control" placeholder="File" name="file" value="">
+    <button class="btn btn-lg btn-block btn-navy" value="Add" type="submit">Upload video</button>
+  </form>
+
+  {% else %}
+  <h1>You first need to login to be able to add a new video.</h2>
+  {% endif %}
+</div>
+
+{% endblock %}

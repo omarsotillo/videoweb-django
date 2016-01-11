@@ -103,8 +103,6 @@ def newvideo(request):
         video_file = request.FILES.get('file')
         video_object = Videos.objects.create(
             user=user, description=description, name=name, tags=tags)
-        video_object.video.save(name + ".mp4", video_file, save=False)
-        video_object.save()
         print("%s %s %s %s" % (user.username, name, description, tags))
 
     return render(request, 'newvideo.html')

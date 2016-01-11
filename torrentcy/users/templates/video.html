@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% load staticfiles %}{% block head %}
+<link rel="stylesheet" href="../static/index.css" /> {% endblock %} {% block content %}
+<div class="container-fluid container-margin"> {% for video in video_list %}
+  <h2>{{video.name}}</h2>
+  <div class="panel">
+    <div class="panel-body">
+      <div class="embed-responsive embed-responsive-16by9">
+        <video class="embed-responsive-item" src="/static/{{video.filename}}" controls> </video>
+      </div>
+      <br>
+      <p class="text-right para"> <i class="fa fa-eye"></i> Views: {{video.views}} <i class="fa fa-thumbs-up"></i>: {{video.upvotes}} <i class="fa fa-thumbs-down"></i>: {{video.downvotes}} </p>
+      <p class="para"> Description: {{video.description}} </p>
+      <p class="para"> <i class="fa fa-user"></i> Upload by: {{video.user.username}} </p>
+      <p class="para"> <i class="fa fa-tags"></i> Tags: {{video.tags}} </p>
+      <form class="form-signin" action="/videos/{{video.id}}/" method="post">
+        {% csrf_token %}
+        <button class="btn btn-lg btn-block btn-navy" value="upvote" name="upvote"type="submit">Upvote</button>
+        <button class="btn btn-lg btn-block btn-navy" value="downvote" name="downvote"type="submit">Downvote</button>
+      </form>
+    </div>
+    <hr> </div> {% endfor %} </div> {% endblock %}
