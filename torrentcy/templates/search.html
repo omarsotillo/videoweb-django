@@ -1,0 +1,28 @@
+{% extends 'base.html' %} {% load staticfiles %}{% block head %}
+<link rel="stylesheet" href="../static/login.css" /> {% endblock %} {% block content %}
+<div class="container container-margin">
+  <form class="form-signin" action="/search/" method="post"> {% csrf_token %}
+    <h2>Search by tag</h2>
+    <label for="inputtext" class="sr-only">Search by tags/name</label>
+    <input type="text" id="inputPassword" class="form-control" placeholder="Tag" name="tag" value="" required autofocus>
+    <button class="btn btn-lg btn-block btn-login" value="Search" type="submit" name="tags">Search by tags</button>
+    <button class="btn btn-lg btn-block btn-login" value="Search" type="submit" name="name">Search by name</button>
+  </form>
+</div>
+<div class="container-fluid container-margin">
+  <h2>Video search:</h2> {% for video in video_list %}
+  <div class="panel col-md-3">
+    <div class="panel-heading">
+      <h3 class="panel-title">{{video.name}}</h3>
+    </div>
+    <div class="panel-body">
+      <div class="embed-responsive embed-responsive-16by9">
+        <video class="embed-responsive-item" src="/static/{{video.filename}}" controls> </video>
+      </div>
+      <br>
+      <p> Description: {{video.description}} <i class="fa fa-eye"></i> Views: {{video.views}} </p>
+      <p> <i class="fa fa-user"></i> Upload by: {{video.user.username}} </p>
+      <p> <i class="fa fa-tags"></i> Tags: {{video.tags}} </p>
+    </div>
+    <hr> <a class="btn btn-navy " href="/videos/{{video.id}}"><i class="fa fa-home"></i> Access video</a>
+    <hr> </div> {% endfor %} </div> {% endblock %}

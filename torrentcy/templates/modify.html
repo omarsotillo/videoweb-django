@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+<!-- HEAD -->{% block head %}
+<link rel="stylesheet" href="../static/login.css" /> {% endblock %}
+<!-- BODY -->{% block content %}
+<div class="container container-margin"> {% if request.user.is_authenticated%}
+  <form class="form-signin" action="/modify/" method="post"> {% csrf_token %}
+    <label for="inputname">Username</label>
+    <input type="text" id="inputname" class="form-control" placeholder="{{request.user.username}}" name="username" value="{{name}}" required autofocus>
+    <label for="inputDescription">First Name</label>
+    <input type="text" id="inputText" class="form-control" placeholder="{{request.user.first_name}}" name="first_name" value="" required>
+    <label for="inputTags">Last Name</label>
+    <input type="text" id="inputTags" class="form-control" placeholder="{{request.user.last_name}}" name="last_name" value="" required>
+    <label for="inputTags">Email</label>
+    <input type="text" id="inputTags" class="form-control" placeholder="{{request.user.email}}" name="email" value="" required>
+    <button class="btn btn-lg btn-block btn-navy" value="Add" type="submit">Modify</button>
+  </form> {% else %}
+  <h1>You first need to login to be able to add a new video.</h2> {% endif %} </div> {% endblock %}
